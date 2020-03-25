@@ -3,9 +3,12 @@ const app = express()
 const Usuario = require('../models/usuario')
 const bcrypt = require('bcrypt')
 const _ = require('underscore')
-    //===========Metodos HTTP=============
+const { VerificaToken, verificaRoleAdmin } = require('../middleware/auth')
 
-app.get('/usuario', function(req, res) {
+
+//===========Metodos HTTP=============
+
+app.get('/usuario', VerificaToken, function(req, res) {
     //let desde = req.params.desde; // -> tambien valido
     let desde = req.query.desde || 0;
     let limite = req.query.limite || 5;
@@ -32,7 +35,7 @@ app.get('/usuario', function(req, res) {
         })
 })
 
-app.post('/usuario', (req, res) => {
+app.post('/usuario', [VerificaToken, verificaRoleAdmin], (req, res) => {
     let body1 = req.body;
 
     let usuario = new Usuario({
@@ -68,7 +71,7 @@ app.post('/usuario', (req, res) => {
 res.json({
     Persona: body1
 }) */
-app.put('/usuario/:id', function(req, res) {
+app.put('/usuario/:id', [VerificaToken, verificaRoleAdmin], function(req, res) {
     let id = req.params.id;
     let body = _.pick(req.body, ['nombre', 'email', 'img', 'role', 'estado']);
 
@@ -89,7 +92,7 @@ app.put('/usuario/:id', function(req, res) {
 
 
 })
-app.delete('/usuario/:id', function(req, res) {
+app.delete('/usuario/:id', [VerificaToken, verificaRoleAdmin], function(req, res) {
     let id = req.params.id;
 
     /* Usuario.findByIdAndRemove(id, (err, usuarioBorrado) => {
