@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
 const { VerificaToken } = require('../middleware/auth')
 
-app.post('/login', (req, res) => {
+app.post('/login', VerificaToken, (req, res) => {
     let body = req.body;
 
     Usuario.findOne({ email: body.email }, (err, UsuarioLogin) => {
