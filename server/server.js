@@ -7,6 +7,7 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
+const path = require('path')
 
 
 //==============================
@@ -21,7 +22,7 @@ app.use(bodyParser.json());
 //impotamos y usamos las rutas de usuario
 //cualquier peticion va ingresar al index
 app.use(require('./routes/index'));
-
+app.use(express.static(path.resolve(__dirname, '../public')));
 //==============================
 //Base de datos - Conexion
 //==============================

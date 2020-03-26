@@ -38,3 +38,9 @@ if (process.env.NODE_ENV === 'dev') {
 }
 
 process.env.URLDB = urlDB;
+
+
+//==================
+//Google sing in
+//==================
+process.env.CLIENT_ID = process.env.CLIENT_ID || '331033860477-dn7o5qf1g3p6avhrf3tmpqdtm9cctcsl.apps.googleusercontent.com';
