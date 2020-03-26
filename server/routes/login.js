@@ -8,7 +8,7 @@ const { VerificaToken } = require('../middleware/auth')
 const { OAuth2Client } = require('google-auth-library');
 const client = new OAuth2Client(process.env.CLIENT_ID);
 
-app.post('/login', VerificaToken, (req, res) => {
+app.post('/login', (req, res) => {
     let body = req.body;
 
     Usuario.findOne({ email: body.email }, (err, UsuarioLogin) => {
