@@ -69,6 +69,7 @@ app.post('/categoria', [VerificaToken, verificaRoleAdmin], (req, res) => {
     let body = req.body;
     let id_usuario = req.user._id;
 
+    console.log(body);
     let categoria = new Categoria();
     categoria.nombre = body.nombre;
     categoria.descripcion = body.descripcion;
